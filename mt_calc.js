@@ -32,12 +32,53 @@
       Returns the previous expression from the list of expressions in the textStr parameter
 
 */
+//this is to run the init function as soon as the page starts
+window.onload = init;
 
+function init() {
+      var calcButtons = document.getElementsByClassName("calcButton");
+      for (var i = 0; i < calcButtons.length; i++) {
+            calcButtons[i].addEventListener("click", buttonClick);     
+      }
+      document.getElementById("calcWindow").addEventListener("onkeydown", calcKeys);
+}
 
+function buttonClick(e) {
+      var calcValue = document.getElementById("calcWindow").value;
+      var calcDecimal = document.getElementById("decimals").value;
+      var buttonValue = e.target.value;
+      switch(buttonValue) {
+            case del:
+              calcValue = "";
+              break;
+            case bksp:
+              calcValue = eraseChar(calcValue);
+              break;
+            case enter:
+              " = " + equalEq(calcValue, calcDecimal) + "\n";
+              break;
+            case prev:
+            " = " + equalEq(lastEq(calcValue), calcDecimal) + "\n";
+            break;
+            default:
+            calcValue += buttonValue;
+          }
+      document.getElementById("calcWindow").value = calcValue;
+      document.getElementById("calcWindow").focus();
+}
 
+function calcKeys(e) {
+      var calcValue;
+      var calcDecimal;
+}
 
+function eraseChar(textStr) {
 
+}
 
+function evalEq(textStr, decimals) {
+
+}
 /* ===================================================================== */
 
 function eraseChar(textStr) { 
