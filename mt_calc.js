@@ -38,47 +38,181 @@ window.onload = init;
 function init() {
       var calcButtons = document.getElementsByClassName("calcButton");
       for (var i = 0; i < calcButtons.length; i++) {
-            calcButtons[i].addEventListener("click", buttonClick);     
+            calcButtons[i].onclick = buttonClick;
       }
-      document.getElementById("calcWindow").addEventListener("onkeydown", calcKeys);
+      // this is so ownkeydown it will register for the calcWindow box and then be entered there
+      document.getElementById("calcWindow").onkeydown = calcKeys;
 }
 
 function buttonClick(e) {
+      //variables that will be used throughout this function
       var calcValue = document.getElementById("calcWindow").value;
       var calcDecimal = document.getElementById("decimals").value;
       var buttonValue = e.target.value;
-      switch(buttonValue) {
-            case del:
-              calcValue = "";
-              break;
-            case bksp:
-              calcValue = eraseChar(calcValue);
-              break;
-            case enter:
-              " = " + equalEq(calcValue, calcDecimal) + "\n";
-              break;
-            case prev:
-            " = " + equalEq(lastEq(calcValue), calcDecimal) + "\n";
-            break;
+      // switch for the buttonValue that will be done with the cases
+      switch (buttonValue) {
+            case "del":
+                  calcValue = "";
+                  break;
+            case "bksp":
+                  calcValue = eraseChar(calcValue);
+                  break;
+            case "enter":
+            // this is just to add on to the end of calcValue
+                  calcValue += " = " + evalEq(calcValue, calcDecimal) + "\n";
+                  break;
+            case "prev":
+            // same as the last but uses the premade function to give you the last Equation
+                  calcValue += " = " + lastEq(calcValue);
+                  break;
             default:
-            calcValue += buttonValue;
+            // makes the calcValue = calcValue + buttonValue;
+                  calcValue += buttonValue;
+                  break;
           }
       document.getElementById("calcWindow").value = calcValue;
       document.getElementById("calcWindow").focus();
 }
 
 function calcKeys(e) {
-      var calcValue;
-      var calcDecimal;
+      //variables that will be used throughout this function
+      var calcValue = document.getElementById("calcWindow").value;
+      var calcDecimal = document.getElementById("decimals").value;
+
+      switch (e.key) {
+            case "Delete":
+                  calcValue = "";
+                  break;
+            case "Enter":
+                  calcValue += " = " + evalEq(calcValue, calcDecimal);
+                  break;
+            case "ArrowUp":
+                  calcValue += lastEq(calcWindow.value);
+                  break;
+                  e.preventDefault();
+      }
+
+      document.getElementById("calcWindow").value = calcValue;
 }
 
-function eraseChar(textStr) {
 
-}
 
-function evalEq(textStr, decimals) {
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ===================================================================== */
 
 function eraseChar(textStr) { 
